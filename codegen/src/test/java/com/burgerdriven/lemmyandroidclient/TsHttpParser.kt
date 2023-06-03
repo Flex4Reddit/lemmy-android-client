@@ -26,7 +26,7 @@ class TsHttpParser {
    * https://regex101.com/r/TkEpF9/latest
    */
   private val lemmyApiExpr = Regex(
-      """(\w+)\((?:\R|form)[^)]*\)\s*\{.*?wrapper<.*?(\w+),.*?(\w+).*?>.*?HttpType\.(\w+).*?"(\S+)".*?}""",
+      """(\w+)\((?:\R|form)[^)]*\)\s*\{.*?wrapper<.*?(\w+),.*?(\w+).*?>.*?HttpType\.(\w+).*?"/(\S+)".*?}""",
       setOf(RegexOption.MULTILINE, RegexOption.DOT_MATCHES_ALL))
   
   fun parse(file: FileSpec.Builder, tsCode: String) {

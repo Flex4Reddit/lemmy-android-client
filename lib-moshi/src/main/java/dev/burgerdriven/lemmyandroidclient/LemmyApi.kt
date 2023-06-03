@@ -140,283 +140,283 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 
 public interface LemmyApi {
-  @GET("/site")
+  @GET("site")
   public suspend fun getSite(@Body form: GetSite): Response<GetSiteResponse>
 
-  @POST("/site")
+  @POST("site")
   public suspend fun createSite(@Body form: CreateSite): Response<SiteResponse>
 
-  @PUT("/site")
+  @PUT("site")
   public suspend fun editSite(@Body form: EditSite): Response<SiteResponse>
 
-  @POST("/user/leave_admin")
+  @POST("user/leave_admin")
   public suspend fun leaveAdmin(@Body form: LeaveAdmin): Response<GetSiteResponse>
 
-  @GET("/modlog")
+  @GET("modlog")
   public suspend fun getModlog(@Body form: GetModlog): Response<GetModlogResponse>
 
-  @GET("/search")
+  @GET("search")
   public suspend fun search(@Body form: Search): Response<SearchResponse>
 
-  @GET("/resolve_object")
+  @GET("resolve_object")
   public suspend fun resolveObject(@Body form: ResolveObject): Response<ResolveObjectResponse>
 
-  @POST("/community")
+  @POST("community")
   public suspend fun createCommunity(@Body form: CreateCommunity): Response<CommunityResponse>
 
-  @GET("/community")
+  @GET("community")
   public suspend fun getCommunity(@Body form: GetCommunity): Response<GetCommunityResponse>
 
-  @PUT("/community")
+  @PUT("community")
   public suspend fun editCommunity(@Body form: EditCommunity): Response<CommunityResponse>
 
-  @GET("/community/list")
+  @GET("community/list")
   public suspend fun listCommunities(@Body form: ListCommunities): Response<ListCommunitiesResponse>
 
-  @POST("/community/follow")
+  @POST("community/follow")
   public suspend fun followCommunity(@Body form: FollowCommunity): Response<CommunityResponse>
 
-  @POST("/community/block")
+  @POST("community/block")
   public suspend fun blockCommunity(@Body form: BlockCommunity): Response<BlockCommunityResponse>
 
-  @POST("/community/delete")
+  @POST("community/delete")
   public suspend fun deleteCommunity(@Body form: DeleteCommunity): Response<CommunityResponse>
 
-  @POST("/community/remove")
+  @POST("community/remove")
   public suspend fun removeCommunity(@Body form: RemoveCommunity): Response<CommunityResponse>
 
-  @POST("/community/transfer")
+  @POST("community/transfer")
   public suspend fun transferCommunity(@Body form: TransferCommunity):
       Response<GetCommunityResponse>
 
-  @POST("/community/ban_user")
+  @POST("community/ban_user")
   public suspend fun banFromCommunity(@Body form: BanFromCommunity):
       Response<BanFromCommunityResponse>
 
-  @POST("/community/mod")
+  @POST("community/mod")
   public suspend fun addModToCommunity(@Body form: AddModToCommunity):
       Response<AddModToCommunityResponse>
 
-  @POST("/post")
+  @POST("post")
   public suspend fun createPost(@Body form: CreatePost): Response<PostResponse>
 
-  @GET("/post")
+  @GET("post")
   public suspend fun getPost(@Body form: GetPost): Response<GetPostResponse>
 
-  @PUT("/post")
+  @PUT("post")
   public suspend fun editPost(@Body form: EditPost): Response<PostResponse>
 
-  @POST("/post/delete")
+  @POST("post/delete")
   public suspend fun deletePost(@Body form: DeletePost): Response<PostResponse>
 
-  @POST("/post/remove")
+  @POST("post/remove")
   public suspend fun removePost(@Body form: RemovePost): Response<PostResponse>
 
-  @POST("/post/mark_as_read")
+  @POST("post/mark_as_read")
   public suspend fun markPostAsRead(@Body form: MarkPostAsRead): Response<PostResponse>
 
-  @POST("/post/lock")
+  @POST("post/lock")
   public suspend fun lockPost(@Body form: LockPost): Response<PostResponse>
 
-  @POST("/post/feature")
+  @POST("post/feature")
   public suspend fun featurePost(@Body form: FeaturePost): Response<PostResponse>
 
-  @GET("/post/list")
+  @GET("post/list")
   public suspend fun getPosts(@Body form: GetPosts): Response<GetPostsResponse>
 
-  @POST("/post/like")
+  @POST("post/like")
   public suspend fun likePost(@Body form: CreatePostLike): Response<PostResponse>
 
-  @PUT("/post/save")
+  @PUT("post/save")
   public suspend fun savePost(@Body form: SavePost): Response<PostResponse>
 
-  @POST("/post/report")
+  @POST("post/report")
   public suspend fun createPostReport(@Body form: CreatePostReport): Response<PostReportResponse>
 
-  @PUT("/post/report/resolve")
+  @PUT("post/report/resolve")
   public suspend fun resolvePostReport(@Body form: ResolvePostReport): Response<PostReportResponse>
 
-  @GET("/post/report/list")
+  @GET("post/report/list")
   public suspend fun listPostReports(@Body form: ListPostReports): Response<ListPostReportsResponse>
 
-  @GET("/post/site_metadata")
+  @GET("post/site_metadata")
   public suspend fun getSiteMetadata(@Body form: GetSiteMetadata): Response<GetSiteMetadataResponse>
 
-  @POST("/comment")
+  @POST("comment")
   public suspend fun createComment(@Body form: CreateComment): Response<CommentResponse>
 
-  @PUT("/comment")
+  @PUT("comment")
   public suspend fun editComment(@Body form: EditComment): Response<CommentResponse>
 
-  @POST("/comment/delete")
+  @POST("comment/delete")
   public suspend fun deleteComment(@Body form: DeleteComment): Response<CommentResponse>
 
-  @POST("/comment/remove")
+  @POST("comment/remove")
   public suspend fun removeComment(@Body form: RemoveComment): Response<CommentResponse>
 
-  @POST("/comment/mark_as_read")
+  @POST("comment/mark_as_read")
   public suspend fun markCommentReplyAsRead(@Body form: MarkCommentReplyAsRead):
       Response<CommentReplyResponse>
 
-  @POST("/comment/like")
+  @POST("comment/like")
   public suspend fun likeComment(@Body form: CreateCommentLike): Response<CommentResponse>
 
-  @PUT("/comment/save")
+  @PUT("comment/save")
   public suspend fun saveComment(@Body form: SaveComment): Response<CommentResponse>
 
-  @POST("/comment/distinguish")
+  @POST("comment/distinguish")
   public suspend fun distinguishComment(@Body form: DistinguishComment): Response<CommentResponse>
 
-  @GET("/comment/list")
+  @GET("comment/list")
   public suspend fun getComments(@Body form: GetComments): Response<GetCommentsResponse>
 
-  @GET("/comment")
+  @GET("comment")
   public suspend fun getComment(@Body form: GetComment): Response<CommentResponse>
 
-  @POST("/comment/report")
+  @POST("comment/report")
   public suspend fun createCommentReport(@Body form: CreateCommentReport):
       Response<CommentReportResponse>
 
-  @PUT("/comment/report/resolve")
+  @PUT("comment/report/resolve")
   public suspend fun resolveCommentReport(@Body form: ResolveCommentReport):
       Response<CommentReportResponse>
 
-  @GET("/comment/report/list")
+  @GET("comment/report/list")
   public suspend fun listCommentReports(@Body form: ListCommentReports):
       Response<ListCommentReportsResponse>
 
-  @GET("/private_message/list")
+  @GET("private_message/list")
   public suspend fun getPrivateMessages(@Body form: GetPrivateMessages):
       Response<PrivateMessagesResponse>
 
-  @POST("/private_message")
+  @POST("private_message")
   public suspend fun createPrivateMessage(@Body form: CreatePrivateMessage):
       Response<PrivateMessageResponse>
 
-  @PUT("/private_message")
+  @PUT("private_message")
   public suspend fun editPrivateMessage(@Body form: EditPrivateMessage):
       Response<PrivateMessageResponse>
 
-  @POST("/private_message/delete")
+  @POST("private_message/delete")
   public suspend fun deletePrivateMessage(@Body form: DeletePrivateMessage):
       Response<PrivateMessageResponse>
 
-  @POST("/private_message/mark_as_read")
+  @POST("private_message/mark_as_read")
   public suspend fun markPrivateMessageAsRead(@Body form: MarkPrivateMessageAsRead):
       Response<PrivateMessageResponse>
 
-  @POST("/private_message/report")
+  @POST("private_message/report")
   public suspend fun createPrivateMessageReport(@Body form: CreatePrivateMessageReport):
       Response<PrivateMessageReportResponse>
 
-  @PUT("/private_message/report/resolve")
+  @PUT("private_message/report/resolve")
   public suspend fun resolvePrivateMessageReport(@Body form: ResolvePrivateMessageReport):
       Response<PrivateMessageReportResponse>
 
-  @GET("/private_message/report/list")
+  @GET("private_message/report/list")
   public suspend fun listPrivateMessageReports(@Body form: ListPrivateMessageReports):
       Response<ListPrivateMessageReportsResponse>
 
-  @POST("/user/register")
+  @POST("user/register")
   public suspend fun register(@Body form: Register): Response<LoginResponse>
 
-  @POST("/user/login")
+  @POST("user/login")
   public suspend fun login(@Body form: Login): Response<LoginResponse>
 
-  @GET("/user")
+  @GET("user")
   public suspend fun getPersonDetails(@Body form: GetPersonDetails):
       Response<GetPersonDetailsResponse>
 
-  @GET("/user/mention")
+  @GET("user/mention")
   public suspend fun getPersonMentions(@Body form: GetPersonMentions):
       Response<GetPersonMentionsResponse>
 
-  @POST("/user/mention/mark_as_read")
+  @POST("user/mention/mark_as_read")
   public suspend fun markPersonMentionAsRead(@Body form: MarkPersonMentionAsRead):
       Response<PersonMentionResponse>
 
-  @GET("/user/replies")
+  @GET("user/replies")
   public suspend fun getReplies(@Body form: GetReplies): Response<GetRepliesResponse>
 
-  @POST("/user/ban")
+  @POST("user/ban")
   public suspend fun banPerson(@Body form: BanPerson): Response<BanPersonResponse>
 
-  @GET("/user/banned")
+  @GET("user/banned")
   public suspend fun getBannedPersons(@Body form: GetBannedPersons): Response<BannedPersonsResponse>
 
-  @POST("/user/block")
+  @POST("user/block")
   public suspend fun blockPerson(@Body form: BlockPerson): Response<BlockPersonResponse>
 
-  @GET("/user/get_captcha")
+  @GET("user/get_captcha")
   public suspend fun getCaptcha(@Body form: GetCaptcha): Response<GetCaptchaResponse>
 
-  @POST("/user/delete_account")
+  @POST("user/delete_account")
   public suspend fun deleteAccount(@Body form: DeleteAccount): Response<DeleteAccountResponse>
 
-  @POST("/user/password_reset")
+  @POST("user/password_reset")
   public suspend fun passwordReset(@Body form: PasswordReset): Response<PasswordResetResponse>
 
-  @POST("/user/password_change")
+  @POST("user/password_change")
   public suspend fun passwordChangeAfterReset(@Body form: PasswordChangeAfterReset):
       Response<LoginResponse>
 
-  @POST("/user/mark_all_as_read")
+  @POST("user/mark_all_as_read")
   public suspend fun markAllAsRead(@Body form: MarkAllAsRead): Response<GetRepliesResponse>
 
-  @PUT("/user/save_user_settings")
+  @PUT("user/save_user_settings")
   public suspend fun saveUserSettings(@Body form: SaveUserSettings): Response<LoginResponse>
 
-  @PUT("/user/change_password")
+  @PUT("user/change_password")
   public suspend fun changePassword(@Body form: ChangePassword): Response<LoginResponse>
 
-  @GET("/user/report_count")
+  @GET("user/report_count")
   public suspend fun getReportCount(@Body form: GetReportCount): Response<GetReportCountResponse>
 
-  @GET("/user/unread_count")
+  @GET("user/unread_count")
   public suspend fun getUnreadCount(@Body form: GetUnreadCount): Response<GetUnreadCountResponse>
 
-  @POST("/user/verify_email")
+  @POST("user/verify_email")
   public suspend fun verifyEmail(@Body form: VerifyEmail): Response<VerifyEmailResponse>
 
-  @POST("/admin/add")
+  @POST("admin/add")
   public suspend fun addAdmin(@Body form: AddAdmin): Response<AddAdminResponse>
 
-  @GET("/admin/registration_application/count")
+  @GET("admin/registration_application/count")
   public suspend fun getUnreadRegistrationApplicationCount(@Body
       form: GetUnreadRegistrationApplicationCount):
       Response<GetUnreadRegistrationApplicationCountResponse>
 
-  @GET("/admin/registration_application/list")
+  @GET("admin/registration_application/list")
   public suspend fun listRegistrationApplications(@Body form: ListRegistrationApplications):
       Response<ListRegistrationApplicationsResponse>
 
-  @PUT("/admin/registration_application/approve")
+  @PUT("admin/registration_application/approve")
   public suspend fun approveRegistrationApplication(@Body form: ApproveRegistrationApplication):
       Response<RegistrationApplicationResponse>
 
-  @POST("/admin/purge/person")
+  @POST("admin/purge/person")
   public suspend fun purgePerson(@Body form: PurgePerson): Response<PurgeItemResponse>
 
-  @POST("/admin/purge/community")
+  @POST("admin/purge/community")
   public suspend fun purgeCommunity(@Body form: PurgeCommunity): Response<PurgeItemResponse>
 
-  @POST("/admin/purge/post")
+  @POST("admin/purge/post")
   public suspend fun purgePost(@Body form: PurgePost): Response<PurgeItemResponse>
 
-  @POST("/admin/purge/comment")
+  @POST("admin/purge/comment")
   public suspend fun purgeComment(@Body form: PurgeComment): Response<PurgeItemResponse>
 
-  @POST("/custom_emoji")
+  @POST("custom_emoji")
   public suspend fun createCustomEmoji(@Body form: CreateCustomEmoji): Response<CustomEmojiResponse>
 
-  @PUT("/custom_emoji")
+  @PUT("custom_emoji")
   public suspend fun editCustomEmoji(@Body form: EditCustomEmoji): Response<CustomEmojiResponse>
 
-  @POST("/custom_emoji/delete")
+  @POST("custom_emoji/delete")
   public suspend fun deleteCustomEmoji(@Body form: DeleteCustomEmoji):
       Response<DeleteCustomEmojiResponse>
 
-  @GET("/federated_instances")
+  @GET("federated_instances")
   public suspend fun getFederatedInstances(@Body form: GetFederatedInstances):
       Response<GetFederatedInstancesResponse>
 }
