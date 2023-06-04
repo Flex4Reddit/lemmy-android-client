@@ -30,7 +30,6 @@ class UnitTest {
         .build()
         .create<LemmyApi>()
     
-    val rep = api.login(Login("admin", "always fail", null))
-    assertEquals(400, rep.code())
+    assertEquals(400, api.getSite("always fail").code())
   }
 }
