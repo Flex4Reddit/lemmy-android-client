@@ -2,15 +2,20 @@ package dev.burgerdriven.lemmyandroidclient
 
 import com.squareup.moshi.Moshi
 import dev.burgerdriven.lemmyandroidclient.types.AddAdmin
-import dev.burgerdriven.lemmyandroidclient.types.Login
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.create
 
 class UnitTest {
+  
+  val retrofit = Retrofit.Builder()
+      .baseUrl("https://lemmy.ml/api/v3/")
+      .addConverterFactory(MoshiConverterFactory.create())
+      .build()
   
   @Test
   fun moshi() {
@@ -23,13 +28,16 @@ class UnitTest {
   }
   
   @Test
-  fun retrofit() = runTest {
-    val api = Retrofit.Builder()
-        .baseUrl("https://lemmy.ml/api/v3/")
-        .addConverterFactory(MoshiConverterFactory.create())
-        .build()
-        .create<LemmyApi>()
-    
+  fun `retrofit api`() = runTest {
+    val api = retrofit.create<LemmyApi>()
+    val err = runCatching { api.getSite("always fail") }
+        .exceptionOrNull() as HttpException
+    assertEquals(400, err.code())
+  }
+  
+  @Test
+  fun `retrofit response api`() = runTest {
+    val api = retrofit.create<LemmyResponseApi>()
     assertEquals(400, api.getSite("always fail").code())
   }
 }

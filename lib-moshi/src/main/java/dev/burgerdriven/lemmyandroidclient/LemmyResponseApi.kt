@@ -120,24 +120,25 @@ import dev.burgerdriven.lemmyandroidclient.types.VerifyEmailResponse
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Query
 
-public interface LemmyApi {
+public interface LemmyResponseApi {
   @GET("site")
-  public suspend fun getSite(@Query("auth") auth: String?): GetSiteResponse
+  public suspend fun getSite(@Query("auth") auth: String?): Response<GetSiteResponse>
 
   @POST("site")
-  public suspend fun createSite(@Body form: CreateSite): SiteResponse
+  public suspend fun createSite(@Body form: CreateSite): Response<SiteResponse>
 
   @PUT("site")
-  public suspend fun editSite(@Body form: EditSite): SiteResponse
+  public suspend fun editSite(@Body form: EditSite): Response<SiteResponse>
 
   @POST("user/leave_admin")
-  public suspend fun leaveAdmin(@Body form: LeaveAdmin): GetSiteResponse
+  public suspend fun leaveAdmin(@Body form: LeaveAdmin): Response<GetSiteResponse>
 
   @GET("modlog")
   public suspend fun getModlog(
@@ -148,7 +149,7 @@ public interface LemmyApi {
     @Query("type") type: ModlogActionType?,
     @Query("other_person_id") otherPersonId: PersonId?,
     @Query("auth") auth: String?,
-  ): GetModlogResponse
+  ): Response<GetModlogResponse>
 
   @GET("search")
   public suspend fun search(
@@ -162,24 +163,24 @@ public interface LemmyApi {
     @Query("page") page: Long?,
     @Query("limit") limit: Long?,
     @Query("auth") auth: String?,
-  ): SearchResponse
+  ): Response<SearchResponse>
 
   @GET("resolve_object")
   public suspend fun resolveObject(@Query("q") q: String, @Query("auth") auth: String):
-      ResolveObjectResponse
+      Response<ResolveObjectResponse>
 
   @POST("community")
-  public suspend fun createCommunity(@Body form: CreateCommunity): CommunityResponse
+  public suspend fun createCommunity(@Body form: CreateCommunity): Response<CommunityResponse>
 
   @GET("community")
   public suspend fun getCommunity(
     @Query("id") id: CommunityId?,
     @Query("name") name: String?,
     @Query("auth") auth: String?,
-  ): GetCommunityResponse
+  ): Response<GetCommunityResponse>
 
   @PUT("community")
-  public suspend fun editCommunity(@Body form: EditCommunity): CommunityResponse
+  public suspend fun editCommunity(@Body form: EditCommunity): Response<CommunityResponse>
 
   @GET("community/list")
   public suspend fun listCommunities(
@@ -188,56 +189,59 @@ public interface LemmyApi {
     @Query("page") page: Long?,
     @Query("limit") limit: Long?,
     @Query("auth") auth: String?,
-  ): ListCommunitiesResponse
+  ): Response<ListCommunitiesResponse>
 
   @POST("community/follow")
-  public suspend fun followCommunity(@Body form: FollowCommunity): CommunityResponse
+  public suspend fun followCommunity(@Body form: FollowCommunity): Response<CommunityResponse>
 
   @POST("community/block")
-  public suspend fun blockCommunity(@Body form: BlockCommunity): BlockCommunityResponse
+  public suspend fun blockCommunity(@Body form: BlockCommunity): Response<BlockCommunityResponse>
 
   @POST("community/delete")
-  public suspend fun deleteCommunity(@Body form: DeleteCommunity): CommunityResponse
+  public suspend fun deleteCommunity(@Body form: DeleteCommunity): Response<CommunityResponse>
 
   @POST("community/remove")
-  public suspend fun removeCommunity(@Body form: RemoveCommunity): CommunityResponse
+  public suspend fun removeCommunity(@Body form: RemoveCommunity): Response<CommunityResponse>
 
   @POST("community/transfer")
-  public suspend fun transferCommunity(@Body form: TransferCommunity): GetCommunityResponse
+  public suspend fun transferCommunity(@Body form: TransferCommunity):
+      Response<GetCommunityResponse>
 
   @POST("community/ban_user")
-  public suspend fun banFromCommunity(@Body form: BanFromCommunity): BanFromCommunityResponse
+  public suspend fun banFromCommunity(@Body form: BanFromCommunity):
+      Response<BanFromCommunityResponse>
 
   @POST("community/mod")
-  public suspend fun addModToCommunity(@Body form: AddModToCommunity): AddModToCommunityResponse
+  public suspend fun addModToCommunity(@Body form: AddModToCommunity):
+      Response<AddModToCommunityResponse>
 
   @POST("post")
-  public suspend fun createPost(@Body form: CreatePost): PostResponse
+  public suspend fun createPost(@Body form: CreatePost): Response<PostResponse>
 
   @GET("post")
   public suspend fun getPost(
     @Query("id") id: PostId?,
     @Query("comment_id") commentId: CommentId?,
     @Query("auth") auth: String?,
-  ): GetPostResponse
+  ): Response<GetPostResponse>
 
   @PUT("post")
-  public suspend fun editPost(@Body form: EditPost): PostResponse
+  public suspend fun editPost(@Body form: EditPost): Response<PostResponse>
 
   @POST("post/delete")
-  public suspend fun deletePost(@Body form: DeletePost): PostResponse
+  public suspend fun deletePost(@Body form: DeletePost): Response<PostResponse>
 
   @POST("post/remove")
-  public suspend fun removePost(@Body form: RemovePost): PostResponse
+  public suspend fun removePost(@Body form: RemovePost): Response<PostResponse>
 
   @POST("post/mark_as_read")
-  public suspend fun markPostAsRead(@Body form: MarkPostAsRead): PostResponse
+  public suspend fun markPostAsRead(@Body form: MarkPostAsRead): Response<PostResponse>
 
   @POST("post/lock")
-  public suspend fun lockPost(@Body form: LockPost): PostResponse
+  public suspend fun lockPost(@Body form: LockPost): Response<PostResponse>
 
   @POST("post/feature")
-  public suspend fun featurePost(@Body form: FeaturePost): PostResponse
+  public suspend fun featurePost(@Body form: FeaturePost): Response<PostResponse>
 
   @GET("post/list")
   public suspend fun getPosts(
@@ -249,19 +253,19 @@ public interface LemmyApi {
     @Query("community_name") communityName: String?,
     @Query("saved_only") savedOnly: Boolean?,
     @Query("auth") auth: String?,
-  ): GetPostsResponse
+  ): Response<GetPostsResponse>
 
   @POST("post/like")
-  public suspend fun likePost(@Body form: CreatePostLike): PostResponse
+  public suspend fun likePost(@Body form: CreatePostLike): Response<PostResponse>
 
   @PUT("post/save")
-  public suspend fun savePost(@Body form: SavePost): PostResponse
+  public suspend fun savePost(@Body form: SavePost): Response<PostResponse>
 
   @POST("post/report")
-  public suspend fun createPostReport(@Body form: CreatePostReport): PostReportResponse
+  public suspend fun createPostReport(@Body form: CreatePostReport): Response<PostReportResponse>
 
   @PUT("post/report/resolve")
-  public suspend fun resolvePostReport(@Body form: ResolvePostReport): PostReportResponse
+  public suspend fun resolvePostReport(@Body form: ResolvePostReport): Response<PostReportResponse>
 
   @GET("post/report/list")
   public suspend fun listPostReports(
@@ -270,35 +274,35 @@ public interface LemmyApi {
     @Query("unresolved_only") unresolvedOnly: Boolean?,
     @Query("community_id") communityId: CommunityId?,
     @Query("auth") auth: String,
-  ): ListPostReportsResponse
+  ): Response<ListPostReportsResponse>
 
   @GET("post/site_metadata")
-  public suspend fun getSiteMetadata(@Query("url") url: String): GetSiteMetadataResponse
+  public suspend fun getSiteMetadata(@Query("url") url: String): Response<GetSiteMetadataResponse>
 
   @POST("comment")
-  public suspend fun createComment(@Body form: CreateComment): CommentResponse
+  public suspend fun createComment(@Body form: CreateComment): Response<CommentResponse>
 
   @PUT("comment")
-  public suspend fun editComment(@Body form: EditComment): CommentResponse
+  public suspend fun editComment(@Body form: EditComment): Response<CommentResponse>
 
   @POST("comment/delete")
-  public suspend fun deleteComment(@Body form: DeleteComment): CommentResponse
+  public suspend fun deleteComment(@Body form: DeleteComment): Response<CommentResponse>
 
   @POST("comment/remove")
-  public suspend fun removeComment(@Body form: RemoveComment): CommentResponse
+  public suspend fun removeComment(@Body form: RemoveComment): Response<CommentResponse>
 
   @POST("comment/mark_as_read")
   public suspend fun markCommentReplyAsRead(@Body form: MarkCommentReplyAsRead):
-      CommentReplyResponse
+      Response<CommentReplyResponse>
 
   @POST("comment/like")
-  public suspend fun likeComment(@Body form: CreateCommentLike): CommentResponse
+  public suspend fun likeComment(@Body form: CreateCommentLike): Response<CommentResponse>
 
   @PUT("comment/save")
-  public suspend fun saveComment(@Body form: SaveComment): CommentResponse
+  public suspend fun saveComment(@Body form: SaveComment): Response<CommentResponse>
 
   @POST("comment/distinguish")
-  public suspend fun distinguishComment(@Body form: DistinguishComment): CommentResponse
+  public suspend fun distinguishComment(@Body form: DistinguishComment): Response<CommentResponse>
 
   @GET("comment/list")
   public suspend fun getComments(
@@ -313,17 +317,19 @@ public interface LemmyApi {
     @Query("parent_id") parentId: CommentId?,
     @Query("saved_only") savedOnly: Boolean?,
     @Query("auth") auth: String?,
-  ): GetCommentsResponse
+  ): Response<GetCommentsResponse>
 
   @GET("comment")
   public suspend fun getComment(@Query("id") id: CommentId, @Query("auth") auth: String?):
-      CommentResponse
+      Response<CommentResponse>
 
   @POST("comment/report")
-  public suspend fun createCommentReport(@Body form: CreateCommentReport): CommentReportResponse
+  public suspend fun createCommentReport(@Body form: CreateCommentReport):
+      Response<CommentReportResponse>
 
   @PUT("comment/report/resolve")
-  public suspend fun resolveCommentReport(@Body form: ResolveCommentReport): CommentReportResponse
+  public suspend fun resolveCommentReport(@Body form: ResolveCommentReport):
+      Response<CommentReportResponse>
 
   @GET("comment/report/list")
   public suspend fun listCommentReports(
@@ -332,7 +338,7 @@ public interface LemmyApi {
     @Query("unresolved_only") unresolvedOnly: Boolean?,
     @Query("community_id") communityId: CommunityId?,
     @Query("auth") auth: String,
-  ): ListCommentReportsResponse
+  ): Response<ListCommentReportsResponse>
 
   @GET("private_message/list")
   public suspend fun getPrivateMessages(
@@ -340,28 +346,31 @@ public interface LemmyApi {
     @Query("page") page: Long?,
     @Query("limit") limit: Long?,
     @Query("auth") auth: String,
-  ): PrivateMessagesResponse
+  ): Response<PrivateMessagesResponse>
 
   @POST("private_message")
-  public suspend fun createPrivateMessage(@Body form: CreatePrivateMessage): PrivateMessageResponse
+  public suspend fun createPrivateMessage(@Body form: CreatePrivateMessage):
+      Response<PrivateMessageResponse>
 
   @PUT("private_message")
-  public suspend fun editPrivateMessage(@Body form: EditPrivateMessage): PrivateMessageResponse
+  public suspend fun editPrivateMessage(@Body form: EditPrivateMessage):
+      Response<PrivateMessageResponse>
 
   @POST("private_message/delete")
-  public suspend fun deletePrivateMessage(@Body form: DeletePrivateMessage): PrivateMessageResponse
+  public suspend fun deletePrivateMessage(@Body form: DeletePrivateMessage):
+      Response<PrivateMessageResponse>
 
   @POST("private_message/mark_as_read")
   public suspend fun markPrivateMessageAsRead(@Body form: MarkPrivateMessageAsRead):
-      PrivateMessageResponse
+      Response<PrivateMessageResponse>
 
   @POST("private_message/report")
   public suspend fun createPrivateMessageReport(@Body form: CreatePrivateMessageReport):
-      PrivateMessageReportResponse
+      Response<PrivateMessageReportResponse>
 
   @PUT("private_message/report/resolve")
   public suspend fun resolvePrivateMessageReport(@Body form: ResolvePrivateMessageReport):
-      PrivateMessageReportResponse
+      Response<PrivateMessageReportResponse>
 
   @GET("private_message/report/list")
   public suspend fun listPrivateMessageReports(
@@ -369,13 +378,13 @@ public interface LemmyApi {
     @Query("limit") limit: Long?,
     @Query("unresolved_only") unresolvedOnly: Boolean?,
     @Query("auth") auth: String,
-  ): ListPrivateMessageReportsResponse
+  ): Response<ListPrivateMessageReportsResponse>
 
   @POST("user/register")
-  public suspend fun register(@Body form: Register): LoginResponse
+  public suspend fun register(@Body form: Register): Response<LoginResponse>
 
   @POST("user/login")
-  public suspend fun login(@Body form: Login): LoginResponse
+  public suspend fun login(@Body form: Login): Response<LoginResponse>
 
   @GET("user")
   public suspend fun getPersonDetails(
@@ -387,7 +396,7 @@ public interface LemmyApi {
     @Query("community_id") communityId: CommunityId?,
     @Query("saved_only") savedOnly: Boolean?,
     @Query("auth") auth: String?,
-  ): GetPersonDetailsResponse
+  ): Response<GetPersonDetailsResponse>
 
   @GET("user/mention")
   public suspend fun getPersonMentions(
@@ -396,11 +405,11 @@ public interface LemmyApi {
     @Query("limit") limit: Long?,
     @Query("unread_only") unreadOnly: Boolean?,
     @Query("auth") auth: String,
-  ): GetPersonMentionsResponse
+  ): Response<GetPersonMentionsResponse>
 
   @POST("user/mention/mark_as_read")
   public suspend fun markPersonMentionAsRead(@Body form: MarkPersonMentionAsRead):
-      PersonMentionResponse
+      Response<PersonMentionResponse>
 
   @GET("user/replies")
   public suspend fun getReplies(
@@ -409,54 +418,55 @@ public interface LemmyApi {
     @Query("limit") limit: Long?,
     @Query("unread_only") unreadOnly: Boolean?,
     @Query("auth") auth: String,
-  ): GetRepliesResponse
+  ): Response<GetRepliesResponse>
 
   @POST("user/ban")
-  public suspend fun banPerson(@Body form: BanPerson): BanPersonResponse
+  public suspend fun banPerson(@Body form: BanPerson): Response<BanPersonResponse>
 
   @GET("user/banned")
-  public suspend fun getBannedPersons(@Query("auth") auth: String): BannedPersonsResponse
+  public suspend fun getBannedPersons(@Query("auth") auth: String): Response<BannedPersonsResponse>
 
   @POST("user/block")
-  public suspend fun blockPerson(@Body form: BlockPerson): BlockPersonResponse
+  public suspend fun blockPerson(@Body form: BlockPerson): Response<BlockPersonResponse>
 
   @GET("user/get_captcha")
-  public suspend fun getCaptcha(@Query("auth") auth: String?): GetCaptchaResponse
+  public suspend fun getCaptcha(@Query("auth") auth: String?): Response<GetCaptchaResponse>
 
   @POST("user/delete_account")
-  public suspend fun deleteAccount(@Body form: DeleteAccount): DeleteAccountResponse
+  public suspend fun deleteAccount(@Body form: DeleteAccount): Response<DeleteAccountResponse>
 
   @POST("user/password_reset")
-  public suspend fun passwordReset(@Body form: PasswordReset): PasswordResetResponse
+  public suspend fun passwordReset(@Body form: PasswordReset): Response<PasswordResetResponse>
 
   @POST("user/password_change")
-  public suspend fun passwordChangeAfterReset(@Body form: PasswordChangeAfterReset): LoginResponse
+  public suspend fun passwordChangeAfterReset(@Body form: PasswordChangeAfterReset):
+      Response<LoginResponse>
 
   @POST("user/mark_all_as_read")
-  public suspend fun markAllAsRead(@Body form: MarkAllAsRead): GetRepliesResponse
+  public suspend fun markAllAsRead(@Body form: MarkAllAsRead): Response<GetRepliesResponse>
 
   @PUT("user/save_user_settings")
-  public suspend fun saveUserSettings(@Body form: SaveUserSettings): LoginResponse
+  public suspend fun saveUserSettings(@Body form: SaveUserSettings): Response<LoginResponse>
 
   @PUT("user/change_password")
-  public suspend fun changePassword(@Body form: ChangePassword): LoginResponse
+  public suspend fun changePassword(@Body form: ChangePassword): Response<LoginResponse>
 
   @GET("user/report_count")
   public suspend fun getReportCount(@Query("community_id") communityId: CommunityId?, @Query("auth")
-      auth: String): GetReportCountResponse
+      auth: String): Response<GetReportCountResponse>
 
   @GET("user/unread_count")
-  public suspend fun getUnreadCount(@Query("auth") auth: String): GetUnreadCountResponse
+  public suspend fun getUnreadCount(@Query("auth") auth: String): Response<GetUnreadCountResponse>
 
   @POST("user/verify_email")
-  public suspend fun verifyEmail(@Body form: VerifyEmail): VerifyEmailResponse
+  public suspend fun verifyEmail(@Body form: VerifyEmail): Response<VerifyEmailResponse>
 
   @POST("admin/add")
-  public suspend fun addAdmin(@Body form: AddAdmin): AddAdminResponse
+  public suspend fun addAdmin(@Body form: AddAdmin): Response<AddAdminResponse>
 
   @GET("admin/registration_application/count")
   public suspend fun getUnreadRegistrationApplicationCount(@Query("auth") auth: String):
-      GetUnreadRegistrationApplicationCountResponse
+      Response<GetUnreadRegistrationApplicationCountResponse>
 
   @GET("admin/registration_application/list")
   public suspend fun listRegistrationApplications(
@@ -464,34 +474,35 @@ public interface LemmyApi {
     @Query("page") page: Long?,
     @Query("limit") limit: Long?,
     @Query("auth") auth: String,
-  ): ListRegistrationApplicationsResponse
+  ): Response<ListRegistrationApplicationsResponse>
 
   @PUT("admin/registration_application/approve")
   public suspend fun approveRegistrationApplication(@Body form: ApproveRegistrationApplication):
-      RegistrationApplicationResponse
+      Response<RegistrationApplicationResponse>
 
   @POST("admin/purge/person")
-  public suspend fun purgePerson(@Body form: PurgePerson): PurgeItemResponse
+  public suspend fun purgePerson(@Body form: PurgePerson): Response<PurgeItemResponse>
 
   @POST("admin/purge/community")
-  public suspend fun purgeCommunity(@Body form: PurgeCommunity): PurgeItemResponse
+  public suspend fun purgeCommunity(@Body form: PurgeCommunity): Response<PurgeItemResponse>
 
   @POST("admin/purge/post")
-  public suspend fun purgePost(@Body form: PurgePost): PurgeItemResponse
+  public suspend fun purgePost(@Body form: PurgePost): Response<PurgeItemResponse>
 
   @POST("admin/purge/comment")
-  public suspend fun purgeComment(@Body form: PurgeComment): PurgeItemResponse
+  public suspend fun purgeComment(@Body form: PurgeComment): Response<PurgeItemResponse>
 
   @POST("custom_emoji")
-  public suspend fun createCustomEmoji(@Body form: CreateCustomEmoji): CustomEmojiResponse
+  public suspend fun createCustomEmoji(@Body form: CreateCustomEmoji): Response<CustomEmojiResponse>
 
   @PUT("custom_emoji")
-  public suspend fun editCustomEmoji(@Body form: EditCustomEmoji): CustomEmojiResponse
+  public suspend fun editCustomEmoji(@Body form: EditCustomEmoji): Response<CustomEmojiResponse>
 
   @POST("custom_emoji/delete")
-  public suspend fun deleteCustomEmoji(@Body form: DeleteCustomEmoji): DeleteCustomEmojiResponse
+  public suspend fun deleteCustomEmoji(@Body form: DeleteCustomEmoji):
+      Response<DeleteCustomEmojiResponse>
 
   @GET("federated_instances")
   public suspend fun getFederatedInstances(@Query("auth") auth: String?):
-      GetFederatedInstancesResponse
+      Response<GetFederatedInstancesResponse>
 }
