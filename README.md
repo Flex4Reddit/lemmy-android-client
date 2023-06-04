@@ -6,6 +6,6 @@ Android bindings for [Lemmy](https://github.com/LemmyNet/lemmy) API written in K
 
 ```gradle
 dependencies {
-    implementation 'com.github.flex4reddit:lemmy-android-client:$VERSION'
+    implementation 'com.github.Flex4Reddit:lemmy-android-client:$VERSION'
 }
 ```
