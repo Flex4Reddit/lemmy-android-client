@@ -75,7 +75,7 @@ class Codegen : NoCoLogging {
   private fun generateApi(path: Path) {
     val tsCode = path.readText()
     val fileSpec = FileSpec.builder(pkgName, "LemmyApi")
-    tsHttpParser.parse(fileSpec, tsCode)
+    tsHttpParser.parse(fileSpec, tsIfaceParser.models, tsCode)
     fileSpec.build().writeTo(libKtMoshiRoot)
   }
 }

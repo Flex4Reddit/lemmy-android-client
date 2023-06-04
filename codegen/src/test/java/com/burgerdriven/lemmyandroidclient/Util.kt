@@ -76,6 +76,26 @@ fun String.snakeToCamel(): String {
   return builder.toString()
 }
 
+fun String.camelToSnake(): String {
+  val builder = StringBuilder()
+  var prevCharWasLowerCase = false
+  
+  for (char in this) {
+    if (char.isUpperCase()) {
+      if (prevCharWasLowerCase) {
+        builder.append('_')
+      }
+      builder.append(char.lowercaseChar())
+      prevCharWasLowerCase = false
+    } else {
+      builder.append(char)
+      prevCharWasLowerCase = true
+    }
+  }
+  
+  return builder.toString()
+}
+
 fun cleanDir(path: Path) {
   Files.walk(path).use { walk ->
     walk.sorted(Comparator.reverseOrder())

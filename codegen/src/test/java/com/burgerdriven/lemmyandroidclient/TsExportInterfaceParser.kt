@@ -26,6 +26,8 @@ class TsExportInterfaceParser {
    */
   val tsIfacePropsExpr = Regex("""\s*(\w+)(\?)?:\s*([^;]+);""")
   
+  val models = mutableMapOf<String, TypeSpec>()
+  
   fun parse(file: FileSpec.Builder, tsCode: String) {
     val tsIface = tsIfaceExpr.find(tsCode) ?: throw Error("couldn't parse iface: $tsCode")
     
@@ -69,6 +71,8 @@ class TsExportInterfaceParser {
                 .addMember("generateAdapter = true")
                 .build()
         )
-        .let { file.addType(it.build()) }
+        .build()
+        .also { models[name] = it }
+        .also { file.addType(it) }
   }
 }

@@ -19,6 +19,7 @@ import retrofit2.http.OPTIONS
 import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Query
 
 class TsHttpParser {
   /**
@@ -29,7 +30,7 @@ class TsHttpParser {
       """(\w+)\((?:\R|form)[^)]*\)\s*\{.*?wrapper<.*?(\w+),.*?(\w+).*?>.*?HttpType\.(\w+).*?"/(\S+)".*?}""",
       setOf(RegexOption.MULTILINE, RegexOption.DOT_MATCHES_ALL))
   
-  fun parse(file: FileSpec.Builder, tsCode: String) {
+  fun parse(file: FileSpec.Builder, models: Map<String, TypeSpec>, tsCode: String) {
     val apiSpec = TypeSpec.interfaceBuilder("LemmyApi")
     
     val apis = lemmyApiExpr.findAll(tsCode).toList()
@@ -45,12 +46,28 @@ class TsHttpParser {
                   .addMember("\"$path\"")
                   .build()
           )
-          .addParameter(
+          .apply {
+            val paramSpecs = if (httpMethod == "Get") { // Http GET? Generate query params
+              val reqTypeSpec = models[reqType]
+                  ?: throw Error("request type spec missing: $reqType")
+              
+              reqTypeSpec.propertySpecs.map { propSpec ->
+                ParameterSpec.builder(propSpec.name, propSpec.type)
+                    .addAnnotation(
+                        AnnotationSpec.builder(Query::class.asTypeName())
+                            .addMember("\"${propSpec.name.camelToSnake()}\"")
+                            .build()
+                    )
+              }
+            } else { // Others? Just send params as body
               ParameterSpec.builder("form", parseTsType(reqType))
                   .addAnnotation(Body::class.asTypeName())
-                  .build()
-          )
+                  .let(::listOf)
+            }
+            addParameters(paramSpecs.map { it.build() })
+          }
           .returns(Response::class.asClassName().parameterizedBy(parseTsType(resType)))
+          // .returns(parseTsType(resType))
           .let { apiSpec.addFunction(it.build()) }
     }
     
