@@ -2,6 +2,7 @@ package com.burgerdriven.lemmyandroidclient
 
 import android.os.Parcelable
 import com.squareup.kotlinpoet.AnnotationSpec
+import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.KModifier
@@ -42,7 +43,7 @@ class TsExportInterfaceParser {
       val (propName, isNullable, propType) = it.destructured
       val propTsType = parseTsType(propType).copy(nullable = isNullable == "?")
       
-      val param = if (propName.contains('_')) { // snake_case? Prettify to camel case
+      val paramSpec = if (propName.contains('_')) { // snake_case? Prettify to camel case
         val camelPropName = propName.snakeToCamel()
         val renameAnnotationSpec = AnnotationSpec.builder(Json::class.asTypeName())
             .addMember("name = %S", propName)
@@ -51,10 +52,15 @@ class TsExportInterfaceParser {
             .addAnnotation(renameAnnotationSpec)
       } else {
         ParameterSpec.builder(propName, propTsType)
-      }.build()
+      }
+      
+      hotfixes[PoetFinder(name, propName)]?.let { // Has hotfix? Add annotation
+        paramSpec.addAnnotation(it)
+      }
       
       // https://stackoverflow.com/a/44484112
       // Constructor & property name must match for pretty constructor
+      val param = paramSpec.build()
       constructorSpec.addParameter(param)
       PropertySpec.builder(param.name, propTsType)
           .initializer(param.name)
@@ -75,4 +81,16 @@ class TsExportInterfaceParser {
         .also { models[name] = it }
         .also { file.addType(it) }
   }
+  
+  private val hotfixes = mapOf(
+      PoetFinder("LocalUser", "default_listing_type") to
+          ClassName(hotfixPkgName, "FixListingType"),
+      PoetFinder("LocalUser", "default_sort_type") to
+          ClassName(hotfixPkgName, "FixSortType"),
+  )
 }
+
+data class PoetFinder(
+    val name: String,
+    val prop: String,
+)

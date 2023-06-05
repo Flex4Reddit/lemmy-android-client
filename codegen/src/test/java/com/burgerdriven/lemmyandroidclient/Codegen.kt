@@ -40,7 +40,7 @@ class Codegen : NoCoLogging {
     println("lemmy-js-root: $lemmyJsRoot")
     println("lemmy-js-root types: $lemmyJsTypes")
     println("lemmy-js-root http: $lemmyJsHttp")
-    cleanDir(libKtMoshiRoot)
+    initDir(libKtMoshiRoot.resolve(codegenPkg.replace('.', '/')))
     
     Files.list(lemmyJsTypes).forEach(::generateModels)
     generateApi(lemmyJsHttp)
@@ -52,7 +52,7 @@ class Codegen : NoCoLogging {
     if (ignoreFiles.contains(path.name)) return // Blacklisted file? No-op
     
     logger.debug { "p: $path ${path.name} ${path.fileName}" }
-    val fileSpec = FileSpec.builder(typesPkgName, path.name.substringBefore('.'))
+    val fileSpec = FileSpec.builder(typesPkg, path.name.substringBefore('.'))
     val tsCode = path.readText()
     
     exportExpr.findAll(tsCode).forEach {

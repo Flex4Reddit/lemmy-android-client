@@ -50,7 +50,7 @@ class TsHttpParser {
         apiSpec.addFunction(api)
       }
       
-      FileSpec.builder(pkgName, fileName)
+      FileSpec.builder(httpPkg, fileName)
           .addType(apiSpec.build())
           .build()
           .writeTo(outPath)

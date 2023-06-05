@@ -10,7 +10,12 @@ import java.nio.file.Path
 import kotlin.io.path.absolutePathString
 
 val pkgName = "dev.burgerdriven.lemmyandroidclient"
-val typesPkgName = "$pkgName.types"
+val hotfixPkgName = "$pkgName.hotfix"
+
+val codegenPkg = "$pkgName.gen"
+val httpPkg = "$pkgName.gen.http"
+val typesPkg = "$pkgName.gen.types"
+
 val regexOpt = setOf(RegexOption.MULTILINE, RegexOption.DOT_MATCHES_ALL)
 val stats = mutableMapOf<String, MutableList<String>>()
 
@@ -56,7 +61,7 @@ fun String.toKtClassName(): ClassName {
     "Array" -> List::class.asClassName()
     "Map" -> Map::class.asClassName()
     "null" -> Nothing::class.asClassName()
-    else -> ClassName(typesPkgName, this)
+    else -> ClassName(typesPkg, this)
   }
 }
 
@@ -96,7 +101,8 @@ fun String.camelToSnake(): String {
   return builder.toString()
 }
 
-fun cleanDir(path: Path) {
+fun initDir(path: Path) {
+  path.toFile().mkdirs()
   Files.walk(path).use { walk ->
     walk.sorted(Comparator.reverseOrder())
         .filter { it.absolutePathString() != path.absolutePathString() }
