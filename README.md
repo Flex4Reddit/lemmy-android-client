@@ -1,4 +1,4 @@
-# lemmy-android-client  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# lemmy-android-client  [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 Android bindings for [Lemmy](https://github.com/LemmyNet/lemmy) API written in Kotlin. Ships with [Moshi](https://github.com/square/moshi) & [Retrofit](https://github.com/square/retrofit) bindings.
 
