@@ -8,9 +8,6 @@ import dev.burgerdriven.lemmyandroidclient.gen.types.ListingType
 import dev.burgerdriven.lemmyandroidclient.gen.types.LocalSite
 import dev.burgerdriven.lemmyandroidclient.gen.types.LocalUser
 import dev.burgerdriven.lemmyandroidclient.gen.types.RegistrationMode
-import dev.burgerdriven.lemmyandroidclient.hotfix.ListingTypeHotfix
-import dev.burgerdriven.lemmyandroidclient.hotfix.RegistrationModeHotfix
-import dev.burgerdriven.lemmyandroidclient.hotfix.SortTypeHotfix
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -22,9 +19,7 @@ import retrofit2.create
 class UnitTest {
   
   val moshiMaker = Moshi.Builder()
-      .add(RegistrationModeHotfix())
-      .add(ListingTypeHotfix())
-      .add(SortTypeHotfix())
+      .addLemmyHotfixAdapters()
       .build()
   
   val retrofitMaker = Retrofit.Builder()

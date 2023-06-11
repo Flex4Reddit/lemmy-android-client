@@ -11,7 +11,9 @@ import dev.burgerdriven.lemmyandroidclient.gen.types.SortType
  * eg: GET /site my_user.local_user_view.local_user.default_sort_type
  */
 class SortTypeHotfix {
-  private val enums = SortType.values()
+  companion object {
+    private val enums = SortType.values()
+  }
   
   @ToJson
   fun toJson(@FixSortType it: SortType) = it.ordinal
