@@ -127,19 +127,19 @@ import retrofit2.http.PUT
 import retrofit2.http.Query
 
 public interface LemmyApi {
-  @GET("site")
+  @GET("api/v3/site")
   public suspend fun getSite(@Query("auth") auth: String?): GetSiteResponse
 
-  @POST("site")
+  @POST("api/v3/site")
   public suspend fun createSite(@Body form: CreateSite): SiteResponse
 
-  @PUT("site")
+  @PUT("api/v3/site")
   public suspend fun editSite(@Body form: EditSite): SiteResponse
 
-  @POST("user/leave_admin")
+  @POST("api/v3/user/leave_admin")
   public suspend fun leaveAdmin(@Body form: LeaveAdmin): GetSiteResponse
 
-  @GET("modlog")
+  @GET("api/v3/modlog")
   public suspend fun getModlog(
     @Query("mod_person_id") modPersonId: PersonId?,
     @Query("community_id") communityId: CommunityId?,
@@ -150,7 +150,7 @@ public interface LemmyApi {
     @Query("auth") auth: String?,
   ): GetModlogResponse
 
-  @GET("search")
+  @GET("api/v3/search")
   public suspend fun search(
     @Query("q") q: String,
     @Query("community_id") communityId: CommunityId?,
@@ -164,24 +164,24 @@ public interface LemmyApi {
     @Query("auth") auth: String?,
   ): SearchResponse
 
-  @GET("resolve_object")
+  @GET("api/v3/resolve_object")
   public suspend fun resolveObject(@Query("q") q: String, @Query("auth") auth: String):
       ResolveObjectResponse
 
-  @POST("community")
+  @POST("api/v3/community")
   public suspend fun createCommunity(@Body form: CreateCommunity): CommunityResponse
 
-  @GET("community")
+  @GET("api/v3/community")
   public suspend fun getCommunity(
     @Query("id") id: CommunityId?,
     @Query("name") name: String?,
     @Query("auth") auth: String?,
   ): GetCommunityResponse
 
-  @PUT("community")
+  @PUT("api/v3/community")
   public suspend fun editCommunity(@Body form: EditCommunity): CommunityResponse
 
-  @GET("community/list")
+  @GET("api/v3/community/list")
   public suspend fun listCommunities(
     @Query("type") type: ListingType?,
     @Query("sort") sort: SortType?,
@@ -190,56 +190,56 @@ public interface LemmyApi {
     @Query("auth") auth: String?,
   ): ListCommunitiesResponse
 
-  @POST("community/follow")
+  @POST("api/v3/community/follow")
   public suspend fun followCommunity(@Body form: FollowCommunity): CommunityResponse
 
-  @POST("community/block")
+  @POST("api/v3/community/block")
   public suspend fun blockCommunity(@Body form: BlockCommunity): BlockCommunityResponse
 
-  @POST("community/delete")
+  @POST("api/v3/community/delete")
   public suspend fun deleteCommunity(@Body form: DeleteCommunity): CommunityResponse
 
-  @POST("community/remove")
+  @POST("api/v3/community/remove")
   public suspend fun removeCommunity(@Body form: RemoveCommunity): CommunityResponse
 
-  @POST("community/transfer")
+  @POST("api/v3/community/transfer")
   public suspend fun transferCommunity(@Body form: TransferCommunity): GetCommunityResponse
 
-  @POST("community/ban_user")
+  @POST("api/v3/community/ban_user")
   public suspend fun banFromCommunity(@Body form: BanFromCommunity): BanFromCommunityResponse
 
-  @POST("community/mod")
+  @POST("api/v3/community/mod")
   public suspend fun addModToCommunity(@Body form: AddModToCommunity): AddModToCommunityResponse
 
-  @POST("post")
+  @POST("api/v3/post")
   public suspend fun createPost(@Body form: CreatePost): PostResponse
 
-  @GET("post")
+  @GET("api/v3/post")
   public suspend fun getPost(
     @Query("id") id: PostId?,
     @Query("comment_id") commentId: CommentId?,
     @Query("auth") auth: String?,
   ): GetPostResponse
 
-  @PUT("post")
+  @PUT("api/v3/post")
   public suspend fun editPost(@Body form: EditPost): PostResponse
 
-  @POST("post/delete")
+  @POST("api/v3/post/delete")
   public suspend fun deletePost(@Body form: DeletePost): PostResponse
 
-  @POST("post/remove")
+  @POST("api/v3/post/remove")
   public suspend fun removePost(@Body form: RemovePost): PostResponse
 
-  @POST("post/mark_as_read")
+  @POST("api/v3/post/mark_as_read")
   public suspend fun markPostAsRead(@Body form: MarkPostAsRead): PostResponse
 
-  @POST("post/lock")
+  @POST("api/v3/post/lock")
   public suspend fun lockPost(@Body form: LockPost): PostResponse
 
-  @POST("post/feature")
+  @POST("api/v3/post/feature")
   public suspend fun featurePost(@Body form: FeaturePost): PostResponse
 
-  @GET("post/list")
+  @GET("api/v3/post/list")
   public suspend fun getPosts(
     @Query("type") type: ListingType?,
     @Query("sort") sort: SortType?,
@@ -251,19 +251,19 @@ public interface LemmyApi {
     @Query("auth") auth: String?,
   ): GetPostsResponse
 
-  @POST("post/like")
+  @POST("api/v3/post/like")
   public suspend fun likePost(@Body form: CreatePostLike): PostResponse
 
-  @PUT("post/save")
+  @PUT("api/v3/post/save")
   public suspend fun savePost(@Body form: SavePost): PostResponse
 
-  @POST("post/report")
+  @POST("api/v3/post/report")
   public suspend fun createPostReport(@Body form: CreatePostReport): PostReportResponse
 
-  @PUT("post/report/resolve")
+  @PUT("api/v3/post/report/resolve")
   public suspend fun resolvePostReport(@Body form: ResolvePostReport): PostReportResponse
 
-  @GET("post/report/list")
+  @GET("api/v3/post/report/list")
   public suspend fun listPostReports(
     @Query("page") page: Long?,
     @Query("limit") limit: Long?,
@@ -272,35 +272,35 @@ public interface LemmyApi {
     @Query("auth") auth: String,
   ): ListPostReportsResponse
 
-  @GET("post/site_metadata")
+  @GET("api/v3/post/site_metadata")
   public suspend fun getSiteMetadata(@Query("url") url: String): GetSiteMetadataResponse
 
-  @POST("comment")
+  @POST("api/v3/comment")
   public suspend fun createComment(@Body form: CreateComment): CommentResponse
 
-  @PUT("comment")
+  @PUT("api/v3/comment")
   public suspend fun editComment(@Body form: EditComment): CommentResponse
 
-  @POST("comment/delete")
+  @POST("api/v3/comment/delete")
   public suspend fun deleteComment(@Body form: DeleteComment): CommentResponse
 
-  @POST("comment/remove")
+  @POST("api/v3/comment/remove")
   public suspend fun removeComment(@Body form: RemoveComment): CommentResponse
 
-  @POST("comment/mark_as_read")
+  @POST("api/v3/comment/mark_as_read")
   public suspend fun markCommentReplyAsRead(@Body form: MarkCommentReplyAsRead):
       CommentReplyResponse
 
-  @POST("comment/like")
+  @POST("api/v3/comment/like")
   public suspend fun likeComment(@Body form: CreateCommentLike): CommentResponse
 
-  @PUT("comment/save")
+  @PUT("api/v3/comment/save")
   public suspend fun saveComment(@Body form: SaveComment): CommentResponse
 
-  @POST("comment/distinguish")
+  @POST("api/v3/comment/distinguish")
   public suspend fun distinguishComment(@Body form: DistinguishComment): CommentResponse
 
-  @GET("comment/list")
+  @GET("api/v3/comment/list")
   public suspend fun getComments(
     @Query("type") type: ListingType?,
     @Query("sort") sort: CommentSortType?,
@@ -315,17 +315,17 @@ public interface LemmyApi {
     @Query("auth") auth: String?,
   ): GetCommentsResponse
 
-  @GET("comment")
+  @GET("api/v3/comment")
   public suspend fun getComment(@Query("id") id: CommentId, @Query("auth") auth: String?):
       CommentResponse
 
-  @POST("comment/report")
+  @POST("api/v3/comment/report")
   public suspend fun createCommentReport(@Body form: CreateCommentReport): CommentReportResponse
 
-  @PUT("comment/report/resolve")
+  @PUT("api/v3/comment/report/resolve")
   public suspend fun resolveCommentReport(@Body form: ResolveCommentReport): CommentReportResponse
 
-  @GET("comment/report/list")
+  @GET("api/v3/comment/report/list")
   public suspend fun listCommentReports(
     @Query("page") page: Long?,
     @Query("limit") limit: Long?,
@@ -334,7 +334,7 @@ public interface LemmyApi {
     @Query("auth") auth: String,
   ): ListCommentReportsResponse
 
-  @GET("private_message/list")
+  @GET("api/v3/private_message/list")
   public suspend fun getPrivateMessages(
     @Query("unread_only") unreadOnly: Boolean?,
     @Query("page") page: Long?,
@@ -342,28 +342,28 @@ public interface LemmyApi {
     @Query("auth") auth: String,
   ): PrivateMessagesResponse
 
-  @POST("private_message")
+  @POST("api/v3/private_message")
   public suspend fun createPrivateMessage(@Body form: CreatePrivateMessage): PrivateMessageResponse
 
-  @PUT("private_message")
+  @PUT("api/v3/private_message")
   public suspend fun editPrivateMessage(@Body form: EditPrivateMessage): PrivateMessageResponse
 
-  @POST("private_message/delete")
+  @POST("api/v3/private_message/delete")
   public suspend fun deletePrivateMessage(@Body form: DeletePrivateMessage): PrivateMessageResponse
 
-  @POST("private_message/mark_as_read")
+  @POST("api/v3/private_message/mark_as_read")
   public suspend fun markPrivateMessageAsRead(@Body form: MarkPrivateMessageAsRead):
       PrivateMessageResponse
 
-  @POST("private_message/report")
+  @POST("api/v3/private_message/report")
   public suspend fun createPrivateMessageReport(@Body form: CreatePrivateMessageReport):
       PrivateMessageReportResponse
 
-  @PUT("private_message/report/resolve")
+  @PUT("api/v3/private_message/report/resolve")
   public suspend fun resolvePrivateMessageReport(@Body form: ResolvePrivateMessageReport):
       PrivateMessageReportResponse
 
-  @GET("private_message/report/list")
+  @GET("api/v3/private_message/report/list")
   public suspend fun listPrivateMessageReports(
     @Query("page") page: Long?,
     @Query("limit") limit: Long?,
@@ -371,13 +371,13 @@ public interface LemmyApi {
     @Query("auth") auth: String,
   ): ListPrivateMessageReportsResponse
 
-  @POST("user/register")
+  @POST("api/v3/user/register")
   public suspend fun register(@Body form: Register): LoginResponse
 
-  @POST("user/login")
+  @POST("api/v3/user/login")
   public suspend fun login(@Body form: Login): LoginResponse
 
-  @GET("user")
+  @GET("api/v3/user")
   public suspend fun getPersonDetails(
     @Query("person_id") personId: PersonId?,
     @Query("username") username: String?,
@@ -389,7 +389,7 @@ public interface LemmyApi {
     @Query("auth") auth: String?,
   ): GetPersonDetailsResponse
 
-  @GET("user/mention")
+  @GET("api/v3/user/mention")
   public suspend fun getPersonMentions(
     @Query("sort") sort: CommentSortType?,
     @Query("page") page: Long?,
@@ -398,11 +398,11 @@ public interface LemmyApi {
     @Query("auth") auth: String,
   ): GetPersonMentionsResponse
 
-  @POST("user/mention/mark_as_read")
+  @POST("api/v3/user/mention/mark_as_read")
   public suspend fun markPersonMentionAsRead(@Body form: MarkPersonMentionAsRead):
       PersonMentionResponse
 
-  @GET("user/replies")
+  @GET("api/v3/user/replies")
   public suspend fun getReplies(
     @Query("sort") sort: CommentSortType?,
     @Query("page") page: Long?,
@@ -411,54 +411,54 @@ public interface LemmyApi {
     @Query("auth") auth: String,
   ): GetRepliesResponse
 
-  @POST("user/ban")
+  @POST("api/v3/user/ban")
   public suspend fun banPerson(@Body form: BanPerson): BanPersonResponse
 
-  @GET("user/banned")
+  @GET("api/v3/user/banned")
   public suspend fun getBannedPersons(@Query("auth") auth: String): BannedPersonsResponse
 
-  @POST("user/block")
+  @POST("api/v3/user/block")
   public suspend fun blockPerson(@Body form: BlockPerson): BlockPersonResponse
 
-  @GET("user/get_captcha")
+  @GET("api/v3/user/get_captcha")
   public suspend fun getCaptcha(@Query("auth") auth: String?): GetCaptchaResponse
 
-  @POST("user/delete_account")
+  @POST("api/v3/user/delete_account")
   public suspend fun deleteAccount(@Body form: DeleteAccount): DeleteAccountResponse
 
-  @POST("user/password_reset")
+  @POST("api/v3/user/password_reset")
   public suspend fun passwordReset(@Body form: PasswordReset): PasswordResetResponse
 
-  @POST("user/password_change")
+  @POST("api/v3/user/password_change")
   public suspend fun passwordChangeAfterReset(@Body form: PasswordChangeAfterReset): LoginResponse
 
-  @POST("user/mark_all_as_read")
+  @POST("api/v3/user/mark_all_as_read")
   public suspend fun markAllAsRead(@Body form: MarkAllAsRead): GetRepliesResponse
 
-  @PUT("user/save_user_settings")
+  @PUT("api/v3/user/save_user_settings")
   public suspend fun saveUserSettings(@Body form: SaveUserSettings): LoginResponse
 
-  @PUT("user/change_password")
+  @PUT("api/v3/user/change_password")
   public suspend fun changePassword(@Body form: ChangePassword): LoginResponse
 
-  @GET("user/report_count")
+  @GET("api/v3/user/report_count")
   public suspend fun getReportCount(@Query("community_id") communityId: CommunityId?, @Query("auth")
       auth: String): GetReportCountResponse
 
-  @GET("user/unread_count")
+  @GET("api/v3/user/unread_count")
   public suspend fun getUnreadCount(@Query("auth") auth: String): GetUnreadCountResponse
 
-  @POST("user/verify_email")
+  @POST("api/v3/user/verify_email")
   public suspend fun verifyEmail(@Body form: VerifyEmail): VerifyEmailResponse
 
-  @POST("admin/add")
+  @POST("api/v3/admin/add")
   public suspend fun addAdmin(@Body form: AddAdmin): AddAdminResponse
 
-  @GET("admin/registration_application/count")
+  @GET("api/v3/admin/registration_application/count")
   public suspend fun getUnreadRegistrationApplicationCount(@Query("auth") auth: String):
       GetUnreadRegistrationApplicationCountResponse
 
-  @GET("admin/registration_application/list")
+  @GET("api/v3/admin/registration_application/list")
   public suspend fun listRegistrationApplications(
     @Query("unread_only") unreadOnly: Boolean?,
     @Query("page") page: Long?,
@@ -466,32 +466,32 @@ public interface LemmyApi {
     @Query("auth") auth: String,
   ): ListRegistrationApplicationsResponse
 
-  @PUT("admin/registration_application/approve")
+  @PUT("api/v3/admin/registration_application/approve")
   public suspend fun approveRegistrationApplication(@Body form: ApproveRegistrationApplication):
       RegistrationApplicationResponse
 
-  @POST("admin/purge/person")
+  @POST("api/v3/admin/purge/person")
   public suspend fun purgePerson(@Body form: PurgePerson): PurgeItemResponse
 
-  @POST("admin/purge/community")
+  @POST("api/v3/admin/purge/community")
   public suspend fun purgeCommunity(@Body form: PurgeCommunity): PurgeItemResponse
 
-  @POST("admin/purge/post")
+  @POST("api/v3/admin/purge/post")
   public suspend fun purgePost(@Body form: PurgePost): PurgeItemResponse
 
-  @POST("admin/purge/comment")
+  @POST("api/v3/admin/purge/comment")
   public suspend fun purgeComment(@Body form: PurgeComment): PurgeItemResponse
 
-  @POST("custom_emoji")
+  @POST("api/v3/custom_emoji")
   public suspend fun createCustomEmoji(@Body form: CreateCustomEmoji): CustomEmojiResponse
 
-  @PUT("custom_emoji")
+  @PUT("api/v3/custom_emoji")
   public suspend fun editCustomEmoji(@Body form: EditCustomEmoji): CustomEmojiResponse
 
-  @POST("custom_emoji/delete")
+  @POST("api/v3/custom_emoji/delete")
   public suspend fun deleteCustomEmoji(@Body form: DeleteCustomEmoji): DeleteCustomEmojiResponse
 
-  @GET("federated_instances")
+  @GET("api/v3/federated_instances")
   public suspend fun getFederatedInstances(@Query("auth") auth: String?):
       GetFederatedInstancesResponse
 }

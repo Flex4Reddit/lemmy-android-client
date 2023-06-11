@@ -23,7 +23,7 @@ class UnitTest {
       .build()
   
   val retrofitMaker = Retrofit.Builder()
-      .baseUrl("https://lemmy.ml/api/v3/")
+      .baseUrl("https://lemmy.world/")
       .addConverterFactory(MoshiConverterFactory.create(moshiMaker))
       .build()
   
