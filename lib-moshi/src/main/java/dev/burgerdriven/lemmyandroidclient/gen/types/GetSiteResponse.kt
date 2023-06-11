@@ -22,7 +22,7 @@ public data class GetSiteResponse(
   public val allLanguages: List<Language>,
   @Json(name = "discussion_languages")
   public val discussionLanguages: List<LanguageId>,
-  public val taglines: List<Tagline>,
+  public val taglines: List<Tagline>?,
   @Json(name = "custom_emojis")
-  public val customEmojis: List<CustomEmojiView>,
+  public val customEmojis: List<CustomEmojiView>?,
 ) : Parcelable
