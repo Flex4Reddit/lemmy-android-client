@@ -10,7 +10,8 @@ Supports the following JSON parsers:
 ## Install [![](https://jitpack.io/v/Flex4Reddit/lemmy-android-client.svg)](https://jitpack.io/#Flex4Reddit/lemmy-android-client)
 
 ```gradle
-implementation 'com.github.Flex4Reddit:lemmy-android-client:$VERSION'
+implementation 'com.github.Flex4Reddit.lemmy-android-client:moshi:$VERSION'
+implementation 'com.github.Flex4Reddit.lemmy-android-client:gson:$VERSION'
 ```
 
 ## Usage
