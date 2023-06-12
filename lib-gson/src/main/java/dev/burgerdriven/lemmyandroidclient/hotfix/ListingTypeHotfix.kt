@@ -20,8 +20,8 @@ class ListingTypeHotfix : JsonDeserializer<ListingType> {
       json: JsonElement,
       typeOfT: Type,
       context: JsonDeserializationContext,
-  ): ListingType {
-    return if (json.asJsonPrimitive.isNumber) enums[json.asInt]
-    else enumValueOf(json.asString)
+  ) = when {
+    json.asJsonPrimitive.isNumber -> enums[json.asInt]
+    else -> enumValueOf(json.asString)
   }
 }
