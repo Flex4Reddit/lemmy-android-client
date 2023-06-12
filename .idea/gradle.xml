@@ -11,6 +11,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/codegen" />
+            <option value="$PROJECT_DIR$/lib-gson" />
             <option value="$PROJECT_DIR$/lib-moshi" />
           </set>
         </option>

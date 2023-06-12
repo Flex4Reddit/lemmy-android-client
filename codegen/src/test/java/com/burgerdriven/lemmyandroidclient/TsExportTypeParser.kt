@@ -11,13 +11,27 @@ class TsExportTypeParser {
   // https://regex101.com/r/mVWCBS/latest
   val tsTypeValueExpr = Regex(""""?(\w+)"?""")
   
-  fun parse(file: FileSpec.Builder, tsCode: String) {
+  private val tsTypes = mutableMapOf<String, List<MatchResult>>()
+  
+  fun parse(tsCode: String) {
     val tsType = tsTypeExpr.find(tsCode) ?: throw Error("couldn't parse type: $tsCode")
     
     val (name, valueStr) = tsType.destructured
     val values = tsTypeValueExpr.findAll(valueStr).toList()
     assert(values.isNotEmpty()) { "couldn't parse type values: $tsCode" }
-    
+    tsTypes[name] = values
+  }
+  
+  fun genTypes(plugin: CodegenPlugin) {
+    tsTypes.forEach { (name, values) ->
+      newTypesFileSpec(typesPkg, name)
+          .also { genType(it, name, values) }
+          .build()
+          .writeTo(plugin.modulePath)
+    }
+  }
+  
+  private fun genType(file: FileSpec.Builder, name: String, values: List<MatchResult>) {
     if (values.size > 1) { // More than 1 value? enum
       val enum = TypeSpec.enumBuilder(name)
       values.forEach {

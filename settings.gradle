@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "lemmy-android-client"
 include ':codegen'
 include ':lib-moshi'
+include ':lib-gson'

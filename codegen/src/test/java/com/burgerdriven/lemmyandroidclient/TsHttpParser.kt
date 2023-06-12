@@ -2,7 +2,6 @@ package com.burgerdriven.lemmyandroidclient
 
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
-import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.ParameterSpec
@@ -20,7 +19,6 @@ import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Query
-import java.nio.file.Path
 
 enum class ApiReturnFormat {
   DirectFmt,
@@ -36,34 +34,33 @@ class TsHttpParser {
       """(\w+)\((?:\R|form)[^)]*\)\s*\{.*?wrapper<.*?(\w+),.*?(\w+).*?>.*?HttpType\.(\w+).*?"/(\S+)".*?}""",
       setOf(RegexOption.MULTILINE, RegexOption.DOT_MATCHES_ALL))
   
-  fun parse(outPath: Path, models: Map<String, TypeSpec>, tsCode: String) {
-    val apiMatches = parseTsCode(tsCode)
-    
+  private lateinit var tsApis: List<MatchResult>
+  
+  fun parse(tsCode: String) {
+    tsApis = lemmyApiExpr.findAll(tsCode).toList()
+    assert(tsApis.isNotEmpty()) { "couldn't parse lemmy api: $tsCode" }
+  }
+  
+  fun genApis(plugin: CodegenPlugin, models: Map<String, TypeSpec>) {
     mapOf(
         "LemmyApi" to ApiReturnFormat.DirectFmt,
         "LemmyResponseApi" to ApiReturnFormat.ResponseFmt
     ).forEach { (fileName, returnFmt) ->
       val apiSpec = TypeSpec.interfaceBuilder(fileName)
       
-      apiMatches.forEach {
+      tsApis.forEach {
         val api = genApi(models, it, returnFmt)
         apiSpec.addFunction(api)
       }
       
-      FileSpec.builder(httpPkg, fileName)
+      newTypesFileSpec(httpPkg, fileName)
           .addType(apiSpec.build())
           .build()
-          .writeTo(outPath)
+          .writeTo(plugin.modulePath)
     }
   }
   
-  fun parseTsCode(tsCode: String): List<MatchResult> {
-    val apis = lemmyApiExpr.findAll(tsCode).toList()
-    assert(apis.isNotEmpty()) { "couldn't parse lemmy api: $tsCode" }
-    return apis
-  }
-  
-  fun genApi(
+  private fun genApi(
       models: Map<String, TypeSpec>,
       api: MatchResult,
       returnFmt: ApiReturnFormat,
@@ -75,7 +72,7 @@ class TsHttpParser {
         .addModifiers(KModifier.SUSPEND, KModifier.ABSTRACT)
         .addAnnotation(
             AnnotationSpec.builder(parseHttpMethod(httpMethod))
-                .addMember("\"api/v3/$path\"")
+                .addMember("api/v3/%S", path)
                 .build()
         )
     

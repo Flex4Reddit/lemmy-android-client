@@ -1,6 +1,7 @@
 package com.burgerdriven.lemmyandroidclient
 
 import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.asClassName
@@ -16,8 +17,9 @@ val codegenPkg = "$pkgName.gen"
 val httpPkg = "$pkgName.gen.http"
 val typesPkg = "$pkgName.gen.types"
 
-val regexOpt = setOf(RegexOption.MULTILINE, RegexOption.DOT_MATCHES_ALL)
 val stats = mutableMapOf<String, MutableList<String>>()
+
+fun newTypesFileSpec(pkg: String, name: String) = FileSpec.builder(pkg, name)
 
 fun parseTsType(typeString: String): TypeName {
   var remaining = typeString.trim()
@@ -115,3 +117,8 @@ fun initDir(path: Path) {
 fun addStat(key: String, name: String) {
   stats[key] = (stats[key] ?: mutableListOf()).apply { add(name) }
 }
+
+data class PoetContext(
+    val name: String,
+    val prop: String,
+)
