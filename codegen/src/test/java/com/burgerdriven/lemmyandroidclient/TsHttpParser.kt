@@ -72,7 +72,7 @@ class TsHttpParser {
         .addModifiers(KModifier.SUSPEND, KModifier.ABSTRACT)
         .addAnnotation(
             AnnotationSpec.builder(parseHttpMethod(httpMethod))
-                .addMember("api/v3/%S", path)
+                .addMember("\"api/v3/$path\"")
                 .build()
         )
     
