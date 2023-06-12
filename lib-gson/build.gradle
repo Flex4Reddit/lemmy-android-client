@@ -36,8 +36,8 @@ android {
 publishing {
     publications {
         release(MavenPublication) {
-            groupId = 'com.github.Flex4Reddit'
-            artifactId = 'lemmy-android-client-gson'
+            groupId = 'com.github.Flex4Reddit.lemmy-android-client'
+            artifactId = 'gson'
             version = 'LOCAL'
 
             afterEvaluate {

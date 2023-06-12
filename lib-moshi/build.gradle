@@ -36,8 +36,8 @@ android {
 publishing {
     publications {
         release(MavenPublication) {
-            groupId = 'com.github.Flex4Reddit'
-            artifactId = 'lemmy-android-client-moshi'
+            groupId = 'com.github.Flex4Reddit.lemmy-android-client'
+            artifactId = 'moshi'
             version = 'LOCAL'
 
             afterEvaluate {
