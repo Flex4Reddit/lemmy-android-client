@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace 'dev.burgerdriven.codegen'
+    namespace 'net.codefeet.codegen'
     compileSdk 33
 
     defaultConfig {

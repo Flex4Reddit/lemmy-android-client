@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace 'dev.burgerdriven.lemmyandroidclient'
+    namespace 'net.codefeet.lemmyandroidclient'
     compileSdk 33
 
     defaultConfig {
